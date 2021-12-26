@@ -7,6 +7,7 @@ const btnEl = {
 console.log(btnEl.btnDecrement);
 console.log(btnEl.btnIncrement);
 console.log(btnEl.value);
+
 const btnClick = (element) => {
     counterValue += element;
     btnEl.value.textContent = counterValue;
