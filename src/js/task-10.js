@@ -16,35 +16,40 @@
 //Каждый элемент после первого, должен быть шире и выше предыдущего на 10px.
 //Все элементы должены иметь случайный цвет фона в формате HEX. Используй готовую функцию getRandomHexColor для получения цвета.
 //Создай функцию destroyBoxes(), которая очищает содержимое div#boxes, тем самым удаляя все созданные элементы.//
-const refs = {
-  create: document.querySelector('[data-create="Create"]'),
-  destroy: document.querySelector('[data-destroy="Destroy"]'),
-  boxes: document.getElementById('boxes'),
-};
 
+let numberBoxes = 0;
 
-refs.create.addEventListener('click', getAmount);
-refs.destroy.addEventListener('click', destroyBoxes);
+const inputChange = document.querySelector('#controls input');
+const createBtn = document.querySelector('#controls button[data-create]');
+const destroyBtn = document.querySelector('#controls button[data-destroy]');
+const boxes = document.querySelector('div#boxes');
 
-function getAmount() {
-  const amount = +document.querySelector('#controls input').value;
-  createBoxes(amount);
-}
-function createBoxes(amount) {
-  const basicSize = 30;
-  const fragment = document.createDocumentFragment();
-  for (const i = 0; i < amount; i++) {
-    const size = basicSize + i * 10;
+const createBoxes = amount => {
+    for (let i = 0; i < amount; i += 1) {
+    const basicSize = 30;
+    const biggestSize = basicSize + i * 10;
     const div = document.createElement('div');
-    div.style.cssText = `width: ${size}px; height: ${size}px; background-color: rgba( ${getRandomHexColor()} , ${getRandomHexColor()} , ${getRandomHexColor()} )`;
-    fragment.appendChild(div);
-  }
-  boxes.appendChild(fragment);
-}
+      div.setAttribute('style',
+        `width: ${biggestSize}px; 
+        height: ${biggestSize}px; 
+        background: ${getRandomHexColor()}`);
+      boxes.append(div);
+    }
+  };
 
-function destroyBoxes() {
+createBtn.addEventListener('click', e => {
+  createBoxes(numberBoxes);
+});
+inputChange.addEventListener('input', e => {
+   numberBoxes = e.target.value;
+});
+
+ destroyBtn.addEventListener('click', e => {
   boxes.innerHTML = '';
-}
+}); 
 function getRandomHexColor() {
   return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 }
+
+
+
