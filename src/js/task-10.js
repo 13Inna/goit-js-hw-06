@@ -1,3 +1,4 @@
+
 let numberBoxes = 0;
 
 const inputChange = document.querySelector('#controls input');
