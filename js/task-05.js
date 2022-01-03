@@ -1,7 +1,16 @@
 const inputEl = document.querySelector("#name-input");
 const outputEl = document.querySelector("#name-output");
 
-inputEl.addEventListener("input", onInputValue);
-function onInputValue(value) {
-    outputEl.textContent = value.currentTarget.value;
+ 
+
+const onInputValue = e => {
+    if (e.target.value) {
+     outputEl.textContent = e.target.value;   
+    }
+    else {
+        outputEl.textContent = 'Anonymous';
+    }
+    
 }
+
+inputEl.addEventListener("input", onInputValue);
